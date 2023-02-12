@@ -38,5 +38,5 @@ tasks.withType<KotlinCompile> {
 }
 
 application {
-    mainClass.set("IrisKt")
+    mainClass.set("DigitsKt")
 }
