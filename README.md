@@ -1,1 +1,1 @@
-![](https://github.com/jslfree080/practicetsne/src/main/kotlin/file/iris/iris.gif)
+![](https://github.com/jslfree080/practicetsne/blob/main/src/main/kotlin/file/iris/iris.gif)
