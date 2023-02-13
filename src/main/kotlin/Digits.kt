@@ -14,7 +14,7 @@ fun main() {
     val digits = ToDataFrame("src/main/kotlin/file/digits/digits.csv")
 
     val numRows = digits.df.count()
-    val randomIndices = List(2000) { Random.nextInt(numRows) }.distinct().toSet()
+    val randomIndices = List(3000) { Random.nextInt(numRows) }.distinct().toSet()
     digits.df = digits.df.filter { row -> row.index() in randomIndices }
 
     // println(digits.df)
@@ -35,19 +35,20 @@ fun main() {
         val digitsColors = listOf("#fff100", "#ff8c00", "#e81123", "#ec008c", "#68217a", "#00188f", "#00bcf2", "#00b294", "#009e49", "#bad80a")
             .zip(listOf("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")).toMap()
 
+        smile.math.MathEx.setSeed(2023)
         val tsne = TSNE(features.toTypedArray(), 2, perplexity, eta, iterations)
-        println(tsne.coordinates.contentDeepToString())
+        // println(tsne.coordinates.contentDeepToString())
         val data = mapOf(
             "x" to tsne.coordinates.map { it[0] },
             "y" to tsne.coordinates.map { it[1] },
             "Digit" to label
         )
         val p = ggplot() +
-                geomPoint(data = data , shape = 16, size = 2) { x = "x"; y = "y"; color = "Digit" } +
+                geomPoint(data = data , shape = 16, size = 1.75) { x = "x"; y = "y"; color = "Digit" } +
                 org.jetbrains.letsPlot.coord.coordFixed(
                     ratio = 1,
-                    xlim = Pair(-85, 85),
-                    ylim = Pair(-85, 85)
+                    xlim = Pair(-80, 80),
+                    ylim = Pair(-80, 80)
                 ) +
                 labs(
                     title = "perplexity: $perplexity",

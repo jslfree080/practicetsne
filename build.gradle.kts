@@ -18,7 +18,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:dataframe:0.9.1") // dependencies for dataframe library
 
     implementation("com.github.haifengl:smile-core:2.6.0")
-    implementation("com.github.haifengl:smile-kotlin:2.6.0") // dependencies for smile library
+    implementation("com.github.haifengl:smile-kotlin:2.6.0")
+    implementation("com.github.haifengl:smile-math:2.6.0") // dependencies for smile library
 
     implementation("org.slf4j:slf4j-simple:2.0.6")
 

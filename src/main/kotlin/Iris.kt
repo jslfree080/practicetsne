@@ -22,6 +22,7 @@ fun main() {
         val eta = 200.0
         val iterations = 1000
 
+        smile.math.MathEx.setSeed(2023)
         val tsne = TSNE(features.toTypedArray(), 2, perplexity, eta, iterations)
         // println(tsne.coordinates.contentDeepToString())
         val data = mapOf(
@@ -30,7 +31,7 @@ fun main() {
             "Species" to label
         )
         val p = ggplot() +
-                geomPoint(data = data , shape = 16, size = 2) { x = "x"; y = "y"; color = "Species" } +
+                geomPoint(data = data , shape = 16, size = 1.75) { x = "x"; y = "y"; color = "Species" } +
                 org.jetbrains.letsPlot.coord.coordFixed(
                     ratio = 1,
                     xlim = Pair(-35, 35),
