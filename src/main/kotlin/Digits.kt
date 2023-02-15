@@ -4,7 +4,7 @@ import org.jetbrains.letsPlot.export.ggsave
 import org.jetbrains.letsPlot.geom.geomPoint
 import org.jetbrains.letsPlot.ggplot
 import org.jetbrains.letsPlot.label.labs
-import org.jetbrains.letsPlot.scale.scaleColorManual
+import org.jetbrains.letsPlot.scale.scaleFillManual
 import smile.manifold.TSNE
 import util.ToDataFrame
 import java.io.File
@@ -32,7 +32,7 @@ fun main() {
         val eta = 200.0
         val iterations = 1000
 
-        val digitsColors = listOf("#fff100", "#ff8c00", "#e81123", "#ec008c", "#68217a", "#00188f", "#00bcf2", "#00b294", "#009e49", "#bad80a")
+        val digitsFill = listOf("#fff100", "#ff8c00", "#e81123", "#ec008c", "#68217a", "#00188f", "#00bcf2", "#00b294", "#009e49", "#bad80a")
             .zip(listOf("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")).toMap()
 
         smile.math.MathEx.setSeed(2023)
@@ -44,7 +44,7 @@ fun main() {
             "Digit" to label
         )
         val p = ggplot() +
-                geomPoint(data = data , shape = 16, size = 1.75) { x = "x"; y = "y"; color = "Digit" } +
+                geomPoint(data = data , shape = 21, size = 1.75, color = "black") { x = "x"; y = "y"; fill = "Digit" } +
                 org.jetbrains.letsPlot.coord.coordFixed(
                     ratio = 1,
                     xlim = Pair(-80, 80),
@@ -54,10 +54,10 @@ fun main() {
                     title = "perplexity: $perplexity",
                     subtitle = "eta: $eta, iterations: $iterations"
                 ) +
-                scaleColorManual(
+                scaleFillManual(
                     name = "Digit",
-                    values = digitsColors.keys.toList(),
-                    breaks = digitsColors.values.toList()
+                    values = digitsFill.keys.toList(),
+                    breaks = digitsFill.values.toList()
                 )
         ggsave(p, "digits${idx}.png", 9.99, 600, "src/main/kotlin/file/digits")
     }

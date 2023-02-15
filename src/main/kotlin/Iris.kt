@@ -31,7 +31,7 @@ fun main() {
             "Species" to label
         )
         val p = ggplot() +
-                geomPoint(data = data , shape = 16, size = 1.75) { x = "x"; y = "y"; color = "Species" } +
+                geomPoint(data = data , shape = 21, size = 1.75, color = "black") { x = "x"; y = "y"; fill = "Species" } +
                 org.jetbrains.letsPlot.coord.coordFixed(
                     ratio = 1,
                     xlim = Pair(-35, 35),
