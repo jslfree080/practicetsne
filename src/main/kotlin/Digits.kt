@@ -47,8 +47,8 @@ fun main() {
                 geomPoint(data = data , shape = 21, size = 1.75, color = "black") { x = "x"; y = "y"; fill = "Digit" } +
                 org.jetbrains.letsPlot.coord.coordFixed(
                     ratio = 1,
-                    xlim = Pair(-80, 80),
-                    ylim = Pair(-80, 80)
+                    xlim = Pair(-85, 85),
+                    ylim = Pair(-85, 85)
                 ) +
                 labs(
                     title = "perplexity: $perplexity",
