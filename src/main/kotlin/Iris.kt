@@ -7,6 +7,7 @@ import org.jetbrains.letsPlot.label.labs
 import java.io.File
 import java.io.InputStreamReader
 import util.ToDataFrame
+import util.scaleData
 
 fun main() {
     val iris = ToDataFrame("src/main/kotlin/file/iris/iris.csv")
@@ -23,7 +24,8 @@ fun main() {
         val iterations = 1000
 
         smile.math.MathEx.setSeed(2023)
-        val tsne = TSNE(features.toTypedArray(), 2, perplexity, eta, iterations)
+        val featuresScaled = scaleData(features.toTypedArray(), "min-max")
+        val tsne = TSNE(featuresScaled, 2, perplexity, eta, iterations)
         // println(tsne.coordinates.contentDeepToString())
         val data = mapOf(
             "x" to tsne.coordinates.map { it[0] },

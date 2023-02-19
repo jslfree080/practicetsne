@@ -6,6 +6,7 @@ import org.jetbrains.letsPlot.ggplot
 import org.jetbrains.letsPlot.label.labs
 import org.jetbrains.letsPlot.scale.scaleFillManual
 import smile.manifold.TSNE
+import util.scaleData
 import util.ToDataFrame
 import java.io.File
 import java.io.InputStreamReader
@@ -24,7 +25,7 @@ fun main() {
         digits.df = digits.df.convert(columnName).toDouble()
     }
     // println(digits.toArrayOfArrays().contentDeepToString())
-    val features = digits.toArrayOfArrays().map { row -> row.copyOfRange(0, 12).map { it as Double }.toDoubleArray() }
+    val features = digits.toArrayOfArrays().map { row -> row.copyOfRange(0, 16).map { it as Double }.toDoubleArray() }
 
     for (idx in 0..9) {
 
@@ -36,7 +37,8 @@ fun main() {
             .zip(listOf("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")).toMap()
 
         smile.math.MathEx.setSeed(2023)
-        val tsne = TSNE(features.toTypedArray(), 2, perplexity, eta, iterations)
+        val featuresScaled = scaleData(features.toTypedArray(), "min-max")
+        val tsne = TSNE(featuresScaled, 2, perplexity, eta, iterations)
         // println(tsne.coordinates.contentDeepToString())
         val data = mapOf(
             "x" to tsne.coordinates.map { it[0] },
