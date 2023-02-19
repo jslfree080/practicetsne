@@ -5,4 +5,4 @@
 ![](https://github.com/jslfree080/practicetsne/blob/main/src/main/kotlin/file/digits/digits.gif)
 
 ## DONE: Implement min-max scaling
-## TODO: KS test → Scaling numerical values of features
+## TODO: KS test prior to scaling numerical values of features
