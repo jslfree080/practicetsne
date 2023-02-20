@@ -1,5 +1,6 @@
-import smile.manifold.TSNE
+import smile.manifold.TSNE // import smile.manifold.laplacian
 import org.jetbrains.kotlinx.dataframe.api.toTypedArray
+import org.jetbrains.kotlinx.dataframe.size
 import org.jetbrains.letsPlot.export.ggsave
 import org.jetbrains.letsPlot.geom.geomPoint
 import org.jetbrains.letsPlot.ggplot
@@ -19,13 +20,15 @@ fun main() {
 
     for (idx in 0..9) {
 
+        // val kNN = idx + 20
+        // val smoothWidthParam = -1.0
         val perplexity = 5.0 * (idx + 1)
-        val eta = 200.0
+        val eta = (iris.df.size().nrow / 12).toDouble() // recommend setting the learning rate to n/12
         val iterations = 1000
 
         smile.math.MathEx.setSeed(2023)
         val featuresScaled = scaleData(features.toTypedArray(), "min-max")
-        val tsne = TSNE(featuresScaled, 2, perplexity, eta, iterations)
+        val tsne = TSNE(featuresScaled, 2, perplexity, eta, iterations) // laplacian(featuresScaled, k = kNN, d = 2, t = smoothWidthParam)
         // println(tsne.coordinates.contentDeepToString())
         val data = mapOf(
             "x" to tsne.coordinates.map { it[0] },
@@ -40,8 +43,8 @@ fun main() {
                     ylim = Pair(-35, 35)
                 ) +
                 labs(
-                    title = "perplexity: $perplexity",
-                    subtitle = "eta: $eta, iterations: $iterations"
+                    title = "perplexity: $perplexity", // "number of nearest neighbors: $kNN"
+                    subtitle = "eta: $eta, iterations: $iterations" // "smoothing parameter of the heat kernel: $smoothWidthParam"
                 )
         ggsave(p, "iris${idx}.png", 9.99, 600, "src/main/kotlin/file/iris")
     }

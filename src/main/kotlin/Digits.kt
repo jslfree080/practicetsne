@@ -1,4 +1,5 @@
 import org.jetbrains.kotlinx.dataframe.api.*
+import org.jetbrains.kotlinx.dataframe.size
 import kotlin.random.Random
 import org.jetbrains.letsPlot.export.ggsave
 import org.jetbrains.letsPlot.geom.geomPoint
@@ -30,7 +31,7 @@ fun main() {
     for (idx in 0..9) {
 
         val perplexity = 5.0 * (idx + 1)
-        val eta = 200.0
+        val eta = (digits.df.size().nrow / 12).toDouble() // recommend setting the learning rate to n/12
         val iterations = 1000
 
         val digitsFill = listOf("#fff100", "#ff8c00", "#e81123", "#ec008c", "#68217a", "#00188f", "#00bcf2", "#00b294", "#009e49", "#bad80a")
